@@ -14,6 +14,12 @@ class App extends Component{
       rooms: 0
     }
   }
+
+  handleFilterChange(payload) {
+    this.setState({
+      filters: payload
+    })
+  }
   
   render(){
     const { filters } = this.state;
@@ -21,7 +27,7 @@ class App extends Component{
     return (
       <div className="App">
         <Hero filters={filters} />
-        <Filters filters={filters} />
+        <Filters filters={filters} onFilterChange={this.handleFilterChange} />
       </div>
     );
   }
