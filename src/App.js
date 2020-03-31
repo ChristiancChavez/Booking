@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Hero from './Components/Hero/Hero';
+import Filters from './Components/Filters/Filters';
+import {today} from './Assets/data.js';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  state =  {
+    filters: {
+      dateFrom: today,
+      dateTo: new Date(today.valueOf() + 86400000),
+      country: '',
+      price: 0,
+      rooms: 0
+    }
+  }
+
+  handleFilterChange(payload) {
+    this.setState({
+      filters: payload
+    })
+  }
+  
+  render(){
+    const { filters } = this.state;
+    console.log(today);
+    return (
+      <div className="App">
+        <Hero filters={filters} />
+        <Filters filters={filters} onFilterChange={this.handleFilterChange} />
+      </div>
+    );
+  }
 }
 
 export default App;
