@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Hero from './Components/Hero/Hero';
 import Filters from './Components/Filters/Filters';
 import Hotels from './Components/Hotels/Hotels';
-import {today} from './Assets/data.js';
-import {hotelsData} from './Assets/data.js';
+import { today } from './Assets/data.js';
+import { hotelsData } from './Assets/data.js';
 import './App.css';
 
 class App extends Component{
@@ -18,7 +18,7 @@ class App extends Component{
     hotels: hotelsData,
   }
 
-  handleFilterChange(payload) {
+  handleFilterChange = (payload) => {
     this.setState({
       filters: payload
     })
