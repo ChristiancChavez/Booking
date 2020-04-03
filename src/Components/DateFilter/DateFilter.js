@@ -12,7 +12,7 @@ class DateFilter extends Component {
         <div className="control has-icons-left">
           <input onChange={ this.handleDateChange } value={ 'date' } name={ name } />
           <span className="icon is-small is-left">
-            <i className={`fas ${icon}`}>{'date'}</i>
+            <i className={ `fas ${icon}` }>{ 'date' }</i>
           </span>
         </div>
       </div>

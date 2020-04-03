@@ -18,12 +18,12 @@ class OptionsFilter extends Component {
             <div className="field">
                 <div className="control has-icons-left">
                     <div className="select" style={ {width: '100%'} }>
-                        <select style={ {width: '100%'} } value={selected} onchange={this.handleOptionchange}>
-                            {showOptions}
+                        <select style={ {width: '100%'} } value={ selected } onChange={ this.handleOptionchange }>
+                            { showOptions }
                         </select>
                     </div>
                     <div className="icon is-small is-left">
-                        <i className={`fas ${icon}`}></i>
+                        <i className={ `fas ${icon}` }></i>
                     </div>
                 </div>
             </div>
