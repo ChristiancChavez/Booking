@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Hero from './Components/Hero/Hero';
 import Filters from './Components/Filters/Filters';
 import Hotels from './Components/Hotels/Hotels';
-import { today } from './Assets/data.js';
-import { hotelsData } from './Assets/data.js';
-import 'bulma/css/bulma.css'
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es'); //Set locale to spanish;import 'bulma/css/bulma.css'
 import './App.css';
 
 class App extends Component{
@@ -16,13 +16,44 @@ class App extends Component{
       price: 0,
       rooms: 0
     },
-    hotels: hotelsData,
+    hotels: [],
   }
 
-  handleFilterChange = (payload) => {
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.timeoutId = setTimeout(() => {
+      const data = require('../assets/data.js');
+      this.setState({
+        hotels: data.hotelsData,
+      });
+    }, 1500);
+  }
+
+  handleFilterChange(newFilters) {
+    const data = require('../assets/data.js');
     this.setState({
-      filters: payload
-    })
+      filters: newFilters,
+      hotels: data.hotelsData.filter((hotel) => {
+        return (
+          ((newFilters.dateFrom === '' && newFilters.dateTo === '') ||
+            (moment(newFilters.dateFrom) >= moment(hotel.availabilityFrom) &&
+              moment(newFilters.dateTo) <= moment(hotel.availabilityTo))) &&
+          (newFilters.country === undefined
+            ? true
+            : hotel.country === newFilters.country) &&
+          (newFilters.price === undefined
+            ? true
+            : hotel.price == newFilters.price) &&
+          (newFilters.rooms === undefined
+            ? true
+            : hotel.rooms <= newFilters.rooms + 5 &&
+              hotel.rooms > newFilters.rooms - 10)
+        );
+      }),
+    });
   }
   
   render(){
@@ -31,7 +62,7 @@ class App extends Component{
       <div className="App">
         <Hero filters={ filters } />
         <Filters filters={ filters } onFilterChange={ this.handleFilterChange } />
-        <Hotels  data={ hotels }/>
+        <Hotels  hotels={ hotels }/>
       </div>
     );
   }
