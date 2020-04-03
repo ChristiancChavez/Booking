@@ -1,12 +1,11 @@
 import React from 'react';
 
 const Hotel = ({ data }) => {
-    console.log(data.photo);
     return (
         <div className="card">
             <div className="card-image">
                 <figure className="image is-4by3">
-                    <img src={ `../../Assets/images/${data.photo}` } alt="Sainte Jeanne Boutique & Spa" />
+                    <img src={data.photo} alt="Sainte Jeanne Boutique & Spa" />
                 </figure>
             </div>
             <div className="card-content">
