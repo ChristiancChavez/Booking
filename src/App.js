@@ -4,6 +4,7 @@ import Filters from './Components/Filters/Filters';
 import Hotels from './Components/Hotels/Hotels';
 import { today } from './Assets/data.js';
 import { hotelsData } from './Assets/data.js';
+import 'bulma/css/bulma.css'
 import './App.css';
 
 class App extends Component{
