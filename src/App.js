@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Hero from './Components/Hero/Hero';
 import Filters from './Components/Filters/Filters';
 import Hotels from './Components/Hotels/Hotels';
+import 'bulma/css/bulma.css';
 import moment from 'moment';
 import 'moment/locale/es';
-moment.locale('es'); //Set locale to spanish;import 'bulma/css/bulma.css'
+moment.locale('es'); 
+
 
 class App extends Component{
   state =  {
@@ -24,7 +26,7 @@ class App extends Component{
 
   fetchData() {
     this.timeoutId = setTimeout(() => {
-      const data = require('../assets/data.js');
+      const data = require('./Assets/data');
       this.setState({
         hotels: data.hotelsData,
       });
@@ -32,7 +34,7 @@ class App extends Component{
   }
 
   handleFilterChange(newFilters) {
-    const data = require('../assets/data.js');
+    const data = require('./Assets/data');
     this.setState({
       filters: newFilters,
       hotels: data.hotelsData.filter((hotel) => {

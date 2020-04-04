@@ -3,24 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-const Hotel = ({ data }) => {
+const Hotel = ({ hotel }) => {
     return (
         <div className="card">
             <div className="card-image">
                 <figure className="image is-4by3">
-                    <img src={data.photo} alt={data.slug} />
+                    <img src={hotel.photo} alt={hotel.slug} />
                 </figure>
             </div>
             <div className="card-content">
-                <p className="title is-4">{ data.name }</p>
-                <p>{ data.description }</p>
+                <p className="title is-4">{ hotel.name }</p>
+                <p>{ hotel.description }</p>
                 <div className="field is-grouped is-grouped-multiline" style={{ marginTop: '1em' }}>
                     <div className="control">
                         <div className="tags has-addons">
                             <span className="tag is-medium is-info">
                                 <FontAwesomeIcon icon={fas.faMapMarker} />
                             </span>
-                            <span className="tag is-medium">{ `${ data.city }, ${ data.country }` }</span>
+                            <span className="tag is-medium">{ `${ hotel.city }, ${ hotel.country }` }</span>
                         </div>
                     </div>
                     <div className="control">
@@ -28,7 +28,7 @@ const Hotel = ({ data }) => {
                             <span className="tag is-medium is-info">
                                 <FontAwesomeIcon icon={fas.faBed} /> 
                             </span>
-                            <span className="tag is-medium">{ data.rooms }</span>
+                            <span className="tag is-medium">{ hotel.rooms }</span>
                         </div>
                     </div>
                     <div className="control">
