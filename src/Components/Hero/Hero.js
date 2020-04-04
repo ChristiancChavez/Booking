@@ -1,27 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 const Hero = ({ filters }) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
     return (
         <section className="hero is-primary">
             <div className="hero-body">
                 <div className="container">
-                <h1 className="title">Hoteles</h1>
+                <h1 className="title">Boo-king</h1>
                 <h2 className="subtitle">
-                    desde el <strong>, {filters.dateFrom.toLocaleDateString(undefined, options)}</strong> hasta el <strong>, {filters.dateTo.toLocaleDateString(undefined, options)}</strong> 
-                    {
-                        !filters.rooms &&  !filters.price && !filters.country ? 
-                        null : 
-                        <span>
-                            en <strong>{filters.country ? filters.country : null}</strong> por <strong>{filters.price? filters.price : null}</strong> de hasta <strong>{filters.rooms ? filters.rooms : null}</strong>
-                        </span>
-                    }
+                    <strong>Hoteles</strong>{' '}
+                    {moment(filters.dateFrom).isValid()
+                    ? `desde el ${moment(filters.dateFrom).format('LL')}`
+                    : ''}
+                    {moment(filters.dateTo).isValid()
+                    ? `, hasta el ${moment(filters.dateTo).format('LL')}`
+                    : ''}
+                    {filters.country !== undefined &&
+                    ` en ${filters.country}`}
+                    {filters.price !== undefined &&
+                    ` por $${filters.price} la noche`}
+                    {filters.rooms !== undefined &&
+                    ` de hasta ${filters.rooms} habitaciones.`}
                 </h2>
                 </div>
             </div>
         </section>
     )
-    
 }
+
+Hero.propTypes = {
+    filters: PropTypes.object.isRequired
+};
 
 export default Hero;

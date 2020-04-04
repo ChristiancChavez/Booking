@@ -5,13 +5,12 @@ import Hotels from './Components/Hotels/Hotels';
 import moment from 'moment';
 import 'moment/locale/es';
 moment.locale('es'); //Set locale to spanish;import 'bulma/css/bulma.css'
-import './App.css';
 
 class App extends Component{
   state =  {
     filters: {
-      dateFrom: today,
-      dateTo: new Date(today.valueOf() + 86400000),
+      dateFrom: '',
+      dateTo: '',
       country: '',
       price: 0,
       rooms: 0
@@ -46,7 +45,7 @@ class App extends Component{
             : hotel.country === newFilters.country) &&
           (newFilters.price === undefined
             ? true
-            : hotel.price == newFilters.price) &&
+            : hotel.price === newFilters.price) &&
           (newFilters.rooms === undefined
             ? true
             : hotel.rooms <= newFilters.rooms + 5 &&
