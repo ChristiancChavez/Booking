@@ -1,48 +1,44 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-class DateFilter extends Component {
-
-  dateCheck = (date) => {
-    if (moment(date).isValid()) {
-      return moment(date).format('YYYY-MM-DD');
-    }
-    return '';
+function dateChecker(date) {
+  if (moment(date).isValid()) {
+    return moment(date).format('YYYY-MM-DD');
   }
+  return '';
+}
 
-  render(){
-    const { date, icon, name, onDateChange, dateMin, dateMax } = this.props;
-    return (
-      <div className="field">
+function DateFilter(props) {
+  return (
+    <div className="field">
       <div className="control has-icons-left">
         <input
           className="input"
           type="date"
-          onChange={ (newDate) => onDateChange(newDate) }
-          value={ this.dateCheck(date) }
-          name={ name }
-          min={ this.dateCheck(dateMin) }
-          max={ this.dateCheck(dateMax) }
+          //Trigger the handleOptionChange method in the Filters component
+          onChange={(newDate) => props.onDateChange(newDate)}
+          value={dateChecker(props.date)}
+          name={props.name}
+          min={dateChecker(props.dateMin)}
+          max={dateChecker(props.dateMax)}
         />
         <span className="icon is-small is-left">
-          <FontAwesomeIcon icon={ icon } />
+          <FontAwesomeIcon icon={props.icon} />
         </span>
       </div>
     </div>
-    )
-  }
+  );
 }
 
 DateFilter.propTypes = {
-  dateMax: PropTypes.object.isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  name: PropTypes.string.isRequired,
-  onDateChange: PropTypes.func.isRequired,
   icon: PropTypes.object.isRequired,
-  
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   dateMin: PropTypes.object.isRequired,
+  dateMax: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  onDateChange: PropTypes.func.isRequired
 };
 
 export default DateFilter;

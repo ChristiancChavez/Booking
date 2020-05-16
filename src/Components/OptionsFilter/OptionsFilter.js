@@ -4,33 +4,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class OptionsFilter extends Component {
 
-    handleOptionChange = (option) => {
-        this.props.onOptionChange(option);
+    handleOptionChange = (newOption) => {
+        this.props.onOptionChange(newOption);
     }
-    render(){
-        const { options, icon, name, selected } = this.props;
-        const showOptions = options.map(option => {
-            return (
-                <option key={option.name} value={option.value === undefined ? '' : option.value}>
-                    {option.name}
-                </option>
-            );
-        })
-    
+    render() {
         return (
-            <div className="field">
-                <div className="control has-icons-left">
-                    <div className="select" style={ {width: '100%'} }>
-                        <select value={ selected } onChange={ this.handleOptionChange } name={ name }>
-                            { showOptions }
-                        </select>
-                    </div>
-                    <div className="icon is-small is-left">
-                        <FontAwesomeIcon icon={ icon } />
-                    </div>
-                </div>
+          <div className="field">
+            <div className="control has-icons-left">
+              <div className="select" style={{ width: '100%' }}>
+                <select
+                  value={this.props.selected}
+                  //Trigger the handleOptionChange method in the Filters component
+                  onChange={this.handleOptionChange}
+                  name={this.props.name}
+                >
+                  {this.props.options.map(option => {
+                    return (
+                      <option
+                        key={option.name}
+                        //If value=undefined then option takes value=textContent
+                        value={option.value === undefined ? '' : option.value}
+                      >
+                        {option.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="icon is-small is-left">
+                <FontAwesomeIcon icon={this.props.icon} />
+              </div>
             </div>
-        )
+          </div>
+        );
     }
     
 }

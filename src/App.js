@@ -13,9 +13,9 @@ class App extends Component{
     filters: {
       dateFrom: '',
       dateTo: '',
-      country: '',
-      price: 0,
-      rooms: 0
+      country: undefined,
+      price: undefined,
+      rooms: undefined
     },
     hotels: [],
   }
@@ -24,34 +24,42 @@ class App extends Component{
     this.fetchData();
   }
 
-  fetchData() {
+  fetchData = () => {
     this.timeoutId = setTimeout(() => {
-      const data = require('./Assets/data');
+      const data = require('./Assets/data.js');
       this.setState({
         hotels: data.hotelsData,
       });
     }, 1500);
   }
+  componentWillUnmount() {
+    clearTimeout(this.timeoutId);
+  }
 
-  handleFilterChange(newFilters) {
-    const data = require('./Assets/data');
+  handleFilterChange = (newFilters) => {
+    const data = require('./Assets/data.js');
     this.setState({
       filters: newFilters,
       hotels: data.hotelsData.filter((hotel) => {
         return (
           ((newFilters.dateFrom === '' && newFilters.dateTo === '') ||
             (moment(newFilters.dateFrom) >= moment(hotel.availabilityFrom) &&
-              moment(newFilters.dateTo) <= moment(hotel.availabilityTo))) &&
+              moment(newFilters.dateTo) <= moment(hotel.availabilityTo))
+          ) &&
           (newFilters.country === undefined
             ? true
-            : hotel.country === newFilters.country) &&
+            : hotel.country === newFilters.country
+          ) &&
           (newFilters.price === undefined
             ? true
-            : hotel.price === newFilters.price) &&
+            // eslint-disable-next-line eqeqeq
+            : hotel.price == newFilters.price
+          ) &&
           (newFilters.rooms === undefined
             ? true
             : hotel.rooms <= newFilters.rooms + 5 &&
-              hotel.rooms > newFilters.rooms - 10)
+              hotel.rooms > newFilters.rooms - 10
+          )
         );
       }),
     });

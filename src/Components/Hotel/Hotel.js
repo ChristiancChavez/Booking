@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import Price from '../Price/Price';
 
 const Hotel = ({ hotel }) => {
     return (
@@ -28,23 +29,19 @@ const Hotel = ({ hotel }) => {
                             <span className="tag is-medium is-info">
                                 <FontAwesomeIcon icon={fas.faBed} /> 
                             </span>
-                            <span className="tag is-medium">{ hotel.rooms }</span>
+                            <span className="tag is-medium">{ hotel.rooms }Habitaciones</span>
                         </div>
                     </div>
-                    <div className="control">
-                        <div className="tags">
-                            <span className="tag is-medium is-info">
-                                <i className="fas fa-dollar-sign" style={{ margin: '0 .125em' }}></i>
-                                <i className="fas fa-dollar-sign" style={{ margin: '0 .125em' }}></i>
-                                <i className="fas fa-dollar-sign" style={{ margin: '0 .125em', opacity: '.25' }}></i>
-                                <i className="fas fa-dollar-sign" style={{ margin: '0 .125em', opacity: '.25' }}></i>
-                            </span>
-                        </div>
-                    </div>
+                    <Price stars={hotel.price} />
                 </div>
             </div>
             <div className="card-footer">
-                <a href="#" className="card-footer-item has-background-primary has-text-white has-text-weight-bold">Reservar</a>
+                <a href="#" onClick={(e) => {
+                        e.preventDefault();
+                        alert('Lo siento, aún no implementamos esto :C');
+                    }} className="card-footer-item has-background-primary has-text-white has-text-weight-bold">
+                    Reservar
+                </a>
             </div>
         </div>
     )
